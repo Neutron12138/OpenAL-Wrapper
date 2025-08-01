@@ -1,12 +1,11 @@
 #include <iostream>
 #include <cmath>
-
 #include "../al_wrapper/al_wrapper.hpp"
 
 int main()
 {
-    al_wrapper::Device device = al_wrapper::create_device();
-    al_wrapper::Context context = al_wrapper::create_context_from_device(device);
+    al_wrapper::PlaybackDevice device = al_wrapper::create_device();
+    al_wrapper::PlaybackContext context = al_wrapper::create_context_from_device(device);
     context.make_context_current();
 
     const int SAMPLE_RATE = 44100;
