@@ -85,6 +85,16 @@ namespace al_wrapper
         alGetSourcefv(m_id, static_cast<ALenum>(param), glm::value_ptr(value));
     }
 
+    void Source::set_gain(ALfloat value) { set_parameter(ParameterName::Gain, value); }
+    void Source::set_position(const glm::vec3 &position) { set_parameter(ParameterName::Position, position); }
+    void Source::set_velocity(const glm::vec3 &velocity) { set_parameter(ParameterName::Velocity, velocity); }
+    void Source::set_direction(const glm::vec3 &direction) { set_parameter(ParameterName::Direction, direction); }
+
+    ALfloat Source::get_gain() const { return get_parameter<ALfloat>(ParameterName::Gain); }
+    glm::vec3 Source::get_position() const { return get_parameter<glm::vec3>(ParameterName::Position); }
+    glm::vec3 Source::get_velocity() const { return get_parameter<glm::vec3>(ParameterName::Velocity); }
+    glm::vec3 Source::get_direction() const { return get_parameter<glm::vec3>(ParameterName::Direction); }
+
     Source create_source()
     {
         Source source;
@@ -103,6 +113,13 @@ namespace al_wrapper
     {
         SourceUniqueRef source = std::make_unique<Source>();
         source->create();
+        return source;
+    }
+
+    Source create_source_from_buffer(const Buffer &buffer)
+    {
+        Source source = create_source();
+        source.set_buffer(buffer);
         return source;
     }
 

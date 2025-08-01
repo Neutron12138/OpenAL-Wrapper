@@ -40,6 +40,26 @@ namespace al_wrapper
         alBufferData(m_id, static_cast<ALenum>(format), data, size, samplerate);
     }
 
+    void Buffer::set_mono_data(const std::vector<base::Int8> &data, ALsizei samplerate)
+    {
+        set_data(Format::Mono8, data, samplerate);
+    }
+
+    void Buffer::set_mono_data(const std::vector<base::Int16> &data, ALsizei samplerate)
+    {
+        set_data(Format::Mono16, data, samplerate);
+    }
+
+    void Buffer::set_stereo_data(const std::vector<base::Int8> &data, ALsizei samplerate)
+    {
+        set_data(Format::Stereo8, data, samplerate);
+    }
+
+    void Buffer::set_stereo_data(const std::vector<base::Int16> &data, ALsizei samplerate)
+    {
+        set_data(Format::Stereo16, data, samplerate);
+    }
+
     void Buffer::set_parameter(ParameterName param, ALint value)
     {
         alBufferi(m_id, static_cast<ALenum>(param), value);
@@ -68,6 +88,34 @@ namespace al_wrapper
     {
         BufferUniqueRef buffer = std::make_unique<Buffer>();
         buffer->create();
+        return buffer;
+    }
+
+    Buffer create_buffer_from_mono_data(const std::vector<base::Int8> &data, ALsizei samplerate)
+    {
+        Buffer buffer = create_buffer();
+        buffer.set_mono_data(data, samplerate);
+        return buffer;
+    }
+
+    Buffer create_buffer_from_mono_data(const std::vector<base::Int16> &data, ALsizei samplerate)
+    {
+        Buffer buffer = create_buffer();
+        buffer.set_mono_data(data, samplerate);
+        return buffer;
+    }
+
+    Buffer create_buffer_from_stereo_data(const std::vector<base::Int8> &data, ALsizei samplerate)
+    {
+        Buffer buffer = create_buffer();
+        buffer.set_stereo_data(data, samplerate);
+        return buffer;
+    }
+
+    Buffer create_buffer_from_stereo_data(const std::vector<base::Int16> &data, ALsizei samplerate)
+    {
+        Buffer buffer = create_buffer();
+        buffer.set_stereo_data(data, samplerate);
         return buffer;
     }
 

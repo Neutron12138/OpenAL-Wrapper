@@ -15,6 +15,14 @@ namespace al_wrapper
     class Source : public ALResource
     {
     public:
+        /// @brief 声源类型
+        enum class Type : ALenum
+        {
+            Static = AL_STATIC,
+            Streaming = AL_STREAMING,
+            Undetermined = AL_UNDETERMINED,
+        };
+
         /// @brief 参数名
         enum class ParameterName : ALenum
         {
@@ -39,6 +47,10 @@ namespace al_wrapper
             SourceState = AL_SOURCE_STATE,
             BuffersQueued = AL_BUFFERS_QUEUED,
             BuffersProcessed = AL_BUFFERS_PROCESSED,
+
+            SecOffset = AL_SEC_OFFSET,
+            SampleOffset = AL_SAMPLE_OFFSET,
+            ByteOffset = AL_BYTE_OFFSET,
         };
 
         /// @brief 声源状态
@@ -79,6 +91,7 @@ namespace al_wrapper
         void set_parameter(ParameterName param, ALfloat value);
         void set_parameter(ParameterName param, const glm::ivec3 &value);
         void set_parameter(ParameterName param, const glm::vec3 &value);
+
         void get_parameter(ParameterName param, ALint &result) const;
         void get_parameter(ParameterName param, ALfloat &result) const;
         void get_parameter(ParameterName param, glm::ivec3 &value) const;
@@ -91,10 +104,23 @@ namespace al_wrapper
             get_parameter(param, result);
             return result;
         }
+
+    public:
+        void set_gain(ALfloat value);
+        void set_position(const glm::vec3 &position);
+        void set_velocity(const glm::vec3 &velocity);
+        void set_direction(const glm::vec3 &direction);
+
+        ALfloat get_gain() const;
+        glm::vec3 get_position() const;
+        glm::vec3 get_velocity() const;
+        glm::vec3 get_direction() const;
     };
 
     Source create_source();
     SourceRef create_source_shared();
     SourceUniqueRef create_source_unique();
+
+    Source create_source_from_buffer(const Buffer &buffer);
 
 } // namespace al_wrapper

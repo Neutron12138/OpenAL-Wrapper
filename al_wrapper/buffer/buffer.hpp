@@ -46,12 +46,10 @@ namespace al_wrapper
 
     public:
         void set_data(Format format, const ALvoid *data, ALsizei size, ALsizei samplerate);
-
-        template <typename T, std::size_t N>
-        void set_data(Format format, const std::array<T, N> &data, ALsizei samplerate)
-        {
-            set_data(format, data.data(), data.size() * sizeof(T), samplerate);
-        }
+        void set_mono_data(const std::vector<base::Int8> &data, ALsizei samplerate = 44100);
+        void set_mono_data(const std::vector<base::Int16> &data, ALsizei samplerate = 44100);
+        void set_stereo_data(const std::vector<base::Int8> &data, ALsizei samplerate = 44100);
+        void set_stereo_data(const std::vector<base::Int16> &data, ALsizei samplerate = 44100);
 
         template <typename T>
         void set_data(Format format, const std::vector<T> &data, ALsizei samplerate)
@@ -75,5 +73,10 @@ namespace al_wrapper
     Buffer create_buffer();
     BufferRef create_buffer_shared();
     BufferUniqueRef create_buffer_unique();
+
+    Buffer create_buffer_from_mono_data(const std::vector<base::Int8> &data, ALsizei samplerate = 44100);
+    Buffer create_buffer_from_mono_data(const std::vector<base::Int16> &data, ALsizei samplerate = 44100);
+    Buffer create_buffer_from_stereo_data(const std::vector<base::Int8> &data, ALsizei samplerate = 44100);
+    Buffer create_buffer_from_stereo_data(const std::vector<base::Int16> &data, ALsizei samplerate = 44100);
 
 } // namespace al_wrapper

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <AL/al.h>
 
 namespace al_wrapper
