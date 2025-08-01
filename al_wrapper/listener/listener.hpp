@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <base/misc/noncopyable_object.hpp>
+#include <base/core/noncopyable_object.hpp>
 #include "../base/al.hpp"
 #include "orientation.hpp"
 

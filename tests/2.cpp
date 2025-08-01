@@ -1,7 +1,7 @@
 #include <iostream>
 #define MINIAUDIO_IMPLEMENTATION
 #include <miniaudio.h>
-#include <base/misc/time.hpp>
+#include <base/core/time.hpp>
 #include "../al_wrapper/al_wrapper.hpp"
 
 struct MADecoder

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <base/misc/time.hpp>
+#include <thread>
 #include "../al_wrapper/al_wrapper.hpp"
 
 int main()
@@ -14,12 +14,7 @@ int main()
     std::cout << "start capture" << std::endl;
     capture.start();
 
-    using Time = base::SteadyTime;
-    auto beg = Time::get_current_time();
-    for (auto curr = Time::get_current_time();
-         (curr - beg).count() <= 2.0;
-         curr = Time::get_current_time())
-        ;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
     std::cout << "stop capture" << std::endl;
     capture.stop();
@@ -36,10 +31,7 @@ int main()
     system("pause");
     std::cout << "start play" << std::endl;
     source.play();
-    for (al_wrapper::Source::State state = source.get_state();
-         state != al_wrapper::Source::State::Stopped;
-         state = source.get_state())
-        ;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
     std::cout << "stop play" << std::endl;
 
     return 0;

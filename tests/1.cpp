@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 #include <cmath>
 #include "../al_wrapper/al_wrapper.hpp"
 
@@ -21,10 +22,7 @@ int main()
     al_wrapper::Source source = al_wrapper::create_source_from_buffer(buffer);
 
     source.play();
-    for (al_wrapper::Source::State state = source.get_state();
-         state != al_wrapper::Source::State::Stopped;
-         state = source.get_state())
-        ;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     return 0;
 }
